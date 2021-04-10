@@ -54,7 +54,7 @@ class CustomFloatDecayAnimationSpec(private val targetTime: Float = 0.5f) : Floa
         val accelerate = - initialVelocity/targetTime
         return initialValue + kotlin.math.abs(0.5f * accelerate * targetTime * targetTime)
     }
-    
+
     override fun getValueFromNanos(
         playTimeNanos: Long,
         initialValue: Float,
