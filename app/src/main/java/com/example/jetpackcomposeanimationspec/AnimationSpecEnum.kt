@@ -13,11 +13,6 @@ enum class AnimationSpecEnum(
     val velocityUpperBound: Float,
     val duration: Int
 ) {
-    EXPONENTIAL_DECAY(
-        "FloatExponentialDecaySpec 2F",
-        FloatExponentialDecaySpec(2f),
-        0f, 3f,20f, 1000
-    ),
     SPLINE_DECAY(
         "SplineDecaySpec",
         SplineBasedFloatDecayAnimationSpec(object: Density {
@@ -28,6 +23,11 @@ enum class AnimationSpecEnum(
 
         }),
         0f, 2f,100f, 250
+    ),
+    EXPONENTIAL_DECAY(
+        "FloatExponentialDecaySpec 2F",
+        FloatExponentialDecaySpec(2f),
+        0f, 15f,100f, 1000
     ),
     CUSTOM_DECAY(
         "CustomDecay",
