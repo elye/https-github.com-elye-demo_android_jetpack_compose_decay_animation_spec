@@ -89,6 +89,7 @@ fun OverallPlotter(modifier: Modifier = Modifier, animationSpecEnum: AnimationSp
                     }
 
                     PlotterView(
+                        "Velocity",
                         penColor,
                         0,
                         velocityUpperBoundFloor,
@@ -138,6 +139,7 @@ fun OverallPlotter(modifier: Modifier = Modifier, animationSpecEnum: AnimationSp
                         .weight(1f)
                 ) {
                     PlotterView(
+                        "Distance",
                         penColor,
                         distanceLowerBoundCeil,
                         distanceUpperBoundFloor,
@@ -201,6 +203,7 @@ private fun Xaxis(
 
 @Composable
 private fun PlotterView(
+    title: String,
     penColor: Color,
     lowerBoundCeil: Int,
     upperBoundFloor: Int,
@@ -213,6 +216,22 @@ private fun PlotterView(
     Canvas(Modifier.fillMaxSize()) {
         drawRect(penColor, size = size, style = Stroke(1.dp.toPx()))
         val step = getStep(upperBound, lowerBound)
+        val textSize = 56.sp.toPx()
+        val textPaint = Paint().asFrameworkPaint().apply {
+            this.textSize = textSize
+            this.textAlign = android.graphics.Paint.Align.CENTER
+            this.style = android.graphics.Paint.Style.FILL_AND_STROKE
+            this.isFakeBoldText = true
+            this.alpha = 64
+        }
+        drawIntoCanvas { canvas ->
+            canvas.nativeCanvas.drawText(
+                title,
+                size.width/2,
+                size.height/2 + textSize/2,
+                textPaint
+            )
+        }
         (lowerBoundCeil..upperBoundFloor step(step)).forEach {
             val yAxis = size.height -
                     ((size.height)) * (it - lowerBound) / (upperBound - lowerBound)
